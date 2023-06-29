@@ -9,5 +9,6 @@ class TextConference(Conference):
 
     def receive(self):
       while True:
-          message = self.receive_socket.recv_string()
+        for receive_socket in self.receive_sockets:
+          message = receive_socket.recv_string()
           print("Mensagem recebida:", message)
