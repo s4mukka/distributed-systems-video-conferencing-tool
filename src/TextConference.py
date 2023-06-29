@@ -1,5 +1,4 @@
 from .Conference import Conference
-import zmq
 
 class TextConference(Conference):
     def send(self):
