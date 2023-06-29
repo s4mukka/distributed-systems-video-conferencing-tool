@@ -10,4 +10,4 @@ class TextConference(Conference):
       while True:
         for receive_socket in self.receive_sockets:
           message = receive_socket.recv_string()
-          print(f"Mensagem recebida (receive_socket.getsockopt(zmq.LAST_ENDPOINT).decode()):", message)
+          print(f"Mensagem recebida {(receive_socket.getsockopt(zmq.LAST_ENDPOINT).decode())}:", message)
