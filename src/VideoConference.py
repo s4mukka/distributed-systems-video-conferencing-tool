@@ -14,7 +14,7 @@ class VideoConference(Conference):
             # cv2.imshow("vid", frame)
 
             # Envia o frame como uma imagem JPEG
-            self.send_socket.send_string(frame.tobytes())
+            self.send_socket.send(frame.tobytes())
 
     def receive(self):
       while True:
