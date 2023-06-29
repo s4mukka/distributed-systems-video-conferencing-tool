@@ -23,6 +23,6 @@ class VideoConference(Conference):
           frame = np.frombuffer(frame_bytes, dtype=np.uint8)
           frame = np.reshape(frame, (640, 480, 3))  # Restaura as dimensões do frame
           # Código para exibir o frame recebido
-          cv2.imshow(self.getsockopt(zmq.LAST_ENDPOINT).decode(), frame)
+          cv2.imshow(receive_socket.getsockopt(zmq.LAST_ENDPOINT).decode(), frame)
           if cv2.waitKey(1) & 0xFF == ord('q'):  # Pressione 'q' para sair
               break
