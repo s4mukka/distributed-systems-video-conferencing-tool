@@ -10,7 +10,7 @@ from .AudioConference import AudioConference
 DOTENV_PATH = Path(__file__).resolve().parent / '..' / '.env'
 load_dotenv(dotenv_path=DOTENV_PATH)
 
-DEBUG = False
+DEBUG = True
 
 if __name__ == '__main__':
     TEXT_PORT = int(os.getenv('TEXT_PORT'))

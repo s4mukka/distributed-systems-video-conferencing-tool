@@ -1,41 +1,30 @@
 from .Conference import Conference
-import cv2
+import base64
+import sounddevice as sd
 import numpy as np
-# import base64
-import zmq
-import pyaudio
 
 class AudioConference(Conference):
-    def __init__(self, port, friends, member):
-        super().__init__(port, friends, member)
-        self.audio_chunk_size = 1024  # Tamanho do chunk de áudio
-        self.audio_format = pyaudio.paInt16  # Formato de áudio
-        self.audio_channels = 1  # Número de canais de áudio
-        self.audio_sample_rate = 44100  # Taxa de amostragem de áudio
-        self.audio_buffer = []
-
     def send(self):
-      audio_stream = self.init_audio_stream(input_audio=True)
-
-      while audio_stream.is_active():
-        audio_data = audio_stream.read(self.audio_chunk_size)
-        self.send_socket.send(audio_data)
+      audio_stream = sd.InputStream(
+        channels=1,
+        samplerate=44100,
+        dtype='float32'
+      )
+      audio_stream.start()
+      while audio_stream.active:
+        audio_data, _ = audio_stream.read(1024)
+        self.send_socket.send(base64.b64encode(audio_data.tobytes()))
 
     def receive(self):
-      audio_stream = self.init_audio_stream(output_audio=True)
+      audio_stream = sd.OutputStream(
+        channels=1,
+        samplerate=44100
+      )
 
+      audio_stream.start()
       while True:
         for receive_socket in self.receive_sockets:
-          audio_data = receive_socket.recv()
+          audio_data_bytes = receive_socket.recv()
+          audio_data = np.frombuffer(base64.b64decode(audio_data_bytes), dtype='float32')
           audio_stream.write(audio_data)
 
-    def init_audio_stream(self, input_audio=False, output_audio=False):
-        p = pyaudio.PyAudio()
-        audio_stream = p.open(
-            format=self.audio_format,
-            channels=self.audio_channels,
-            rate=self.audio_sample_rate,
-            input=input_audio,
-            output=output_audio
-        )
-        return audio_stream
