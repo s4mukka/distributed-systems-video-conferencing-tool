@@ -1,6 +1,13 @@
 
 # Video Conference Tool
 
+## Integrantes do grupo: 
+            Augustin Gabriel Castilho
+            Marcus Vinicius Soares de Oliveira 
+            Romulo Alves da Silva 
+            Samuel Henrique Ferreira Pereira 
+
+
 Esta é uma ferramenta de videoconferência simples que permite a comunicação de vídeo, áudio e texto entre vários participantes simultâneos. A ferramenta foi desenvolvida em Python 3 e utiliza a biblioteca 0MQ para comunicação assíncrona entre os participantes.
 
 ## Instalação
