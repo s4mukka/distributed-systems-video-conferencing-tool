@@ -6,8 +6,8 @@ import zmq
 import pyaudio
 
 class AudioConference(Conference):
-    def __init__(self, port, friends):
-        super().__init__(port, friends)
+    def __init__(self, port, friends, member):
+        super().__init__(port, friends, member)
         self.audio_chunk_size = 1024  # Tamanho do chunk de áudio
         self.audio_format = pyaudio.paInt16  # Formato de áudio
         self.audio_channels = 1  # Número de canais de áudio
@@ -20,7 +20,6 @@ class AudioConference(Conference):
 
       while audio_stream.is_active():
         audio_data = audio_stream.read(self.audio_chunk_size)
-        # audio_stream.write(audio_data)
         self.send_socket.send(audio_data)
 
     def receive(self):
@@ -34,8 +33,6 @@ class AudioConference(Conference):
     def init_audio_stream(self, input_audio=False, output_audio=False):
         p = pyaudio.PyAudio()
         audio_stream = p.open(
-            # input_device_index=0,
-            # output_device_index=0,
             format=self.audio_format,
             channels=self.audio_channels,
             rate=self.audio_sample_rate,
