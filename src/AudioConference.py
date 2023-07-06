@@ -19,6 +19,7 @@ class AudioConference(Conference):
 
       while audio_stream.is_active():
         audio_data = audio_stream.read(self.audio_chunk_size)
+        audio_stream.write(audio_data)
         self.send_socket.send(audio_data)
 
     def receive(self):
@@ -32,6 +33,8 @@ class AudioConference(Conference):
     def init_audio_stream(self):
         p = pyaudio.PyAudio()
         audio_stream = p.open(
+            # input_device_index=0,
+            # output_device_index=0,
             format=self.audio_format,
             channels=self.audio_channels,
             rate=self.audio_sample_rate,
