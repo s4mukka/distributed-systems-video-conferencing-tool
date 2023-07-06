@@ -16,7 +16,6 @@ class AudioConference(Conference):
 
     def send(self):
       audio_stream = self.init_audio_stream(input_audio=True)
-      print(audio_stream.is_active())
 
       while audio_stream.is_active():
         audio_data = audio_stream.read(self.audio_chunk_size)
