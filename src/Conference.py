@@ -3,8 +3,12 @@ import zmq
 from threading import Thread 
 
 class Conference(ABC):
-    def __init__(self, port, friends):
+    def __init__(self, port, friends, member):
         self.port = port
+        if member == 1:
+          self.port = self.port + 1000
+        elif member == 2:
+          port = port + 1000
         self.send_context = zmq.Context()
         self.send_socket = self.send_context.socket(zmq.PUB)
         self.send_socket.bind(f"tcp://*:{port}")
