@@ -17,6 +17,7 @@ if __name__ == '__main__':
     VIDEO_PORT = int(os.getenv('VIDEO_PORT'))
     AUDIO_PORT = int(os.getenv('AUDIO_PORT'))
     ADDRESS_FRIENDS = os.getenv('ADDRESS_FRIENDS')
+    member=None
     if DEBUG:
         member = int(sys.argv[1])
         ADDRESS_FRIENDS = '127.0.0.1'
