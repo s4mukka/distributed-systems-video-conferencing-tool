@@ -1,3 +1,5 @@
+#código responsável pela interface de vídeo da stream
+
 from .Conference import Conference
 import cv2
 import numpy as np

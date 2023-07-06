@@ -1,3 +1,4 @@
+#código responsável pela interface de texto da stream
 from .Conference import Conference
 import zmq
 

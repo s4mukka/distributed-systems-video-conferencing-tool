@@ -1,8 +1,14 @@
+#código responsável por chamar a comunição Pub / Subscribe
+
 from abc import ABC, abstractmethod
 import zmq
 from threading import Thread 
 
+
+#Super classe responsável por instanciar todos os parâmretros de comunicação
 class Conference(ABC):
+    
+    #função responsável por instanciar todos os parâmetros de comunicação de pub/sub por meio de zmq
     def __init__(self, port, friends, member):
         self.port = port
         if member == 1:
